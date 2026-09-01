@@ -17,7 +17,7 @@ with open(os.path.join(HERE, "README.md"), encoding="utf-8") as fp:
 
 setup(
     name="osf_pigeon",
-    version="0.0.11",
+    version="0.0.12",
     description="A utility for archiving osf storage projects at archive.org",
     long_description=long_description,
     author="Center for Open Science",
