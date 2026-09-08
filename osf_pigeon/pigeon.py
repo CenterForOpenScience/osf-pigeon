@@ -94,7 +94,7 @@ async def get_metadata_for_ia_item(json_metadata):
         get_relationship_attribute(
             "creator",
             f'{settings.OSF_API_URL}v2/registrations/{json_metadata["data"]["id"]}/contributors/'
-            f"?filter[bibliographic]=true&",
+            f"?filter[bibliographic]=true",
             get_contributor_info,
         ),
         get_relationship_attribute(
@@ -224,7 +224,8 @@ async def get_with_retry(url, retry_on=(), sleep_period=None, headers=None):
 async def get_pages(url, page, result=None, parse_json=None, semaphore=None):
     if result is None:
         result = {}
-    url = f"{url}?page={page}&page={page}"
+    separator = "&" if "?" in url else "?"
+    url = f"{url}{separator}page={page}"
     data = {}
     if semaphore is None:
         data = await get_with_retry(url, retry_on=(429,))

@@ -120,7 +120,7 @@ class TestDumpJSONFilesToDirMultipage:
                 body=page1,
             )
             m.get(
-                f"{settings.OSF_API_URL}v2/registrations/{guid}/wikis/?page=2&page=2",
+                f"{settings.OSF_API_URL}v2/registrations/{guid}/wikis/?page=2",
                 body=page2,
             )
             with tempfile.TemporaryDirectory() as temp_dir:
