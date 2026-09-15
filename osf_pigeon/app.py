@@ -10,7 +10,7 @@ from sentry_sdk.integrations.aiohttp import AioHttpIntegration
 
 sentry_sdk.init(
     dsn=settings.SENTRY_DSN,
-    release="0.0.12",
+    release="26.0.0",
     integrations=[AioHttpIntegration()],
 )
 
