@@ -23,7 +23,8 @@ def test_urllib3_compatibility():
     # internetarchive==1.9.9's get_session calls
     # Retry.DEFAULT_METHOD_WHITELIST, which is removed in urllib3 2.0.
     # requirements.txt now pins urllib3<2.
-    # This test ensures that the pinned version of urllib3 is compatible with internetarchive==1.9.9.
+    # This test ensures that the pinned version of urllib3
+    # is compatible with internetarchive==1.9.9.
     session = internetarchive.get_session(
         config={
             "s3": {"access": settings.IA_ACCESS_KEY, "secret": settings.IA_SECRET_KEY},
