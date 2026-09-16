@@ -1,5 +1,6 @@
 import os
 import json
+import internetarchive
 import pytest
 from osf_pigeon import settings
 
@@ -16,6 +17,20 @@ from osf_pigeon.pigeon import (
 from aioresponses import aioresponses
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def test_urllib3_compatibility():
+    # internetarchive==1.9.9's get_session calls
+    # Retry.DEFAULT_METHOD_WHITELIST, which is removed in urllib3 2.0.
+    # requirements.txt now pins urllib3<2.
+    # This test ensures that the pinned version of urllib3
+    # is compatible with internetarchive==1.9.9.
+    session = internetarchive.get_session(
+        config={
+            "s3": {"access": settings.IA_ACCESS_KEY, "secret": settings.IA_SECRET_KEY},
+        },
+    )
+    assert session is not None
 
 
 @pytest.mark.asyncio

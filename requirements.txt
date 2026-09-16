@@ -3,5 +3,6 @@ datacite==1.0.1
 internetarchive==1.9.9
 ratelimit==2.2.1
 requests==2.32.3
+urllib3<2
 aiohttp==3.9.5
 sentry-sdk==2.55.0
