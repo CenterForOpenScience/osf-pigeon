@@ -55,6 +55,8 @@ def get_contributor_info(contrib):
     errors = contrib["embeds"]["users"].get('errors')
     if errors and errors[0]['detail'] == 'The requested user is no longer available.':
         return errors[0]['meta']['full_name']
+    elif errors and errors[0]['detail'] == 'Not found.':  # GDPR deleted user
+        return "Deleted user"
     else:
         return contrib["embeds"]["users"]["data"]["attributes"]["full_name"]
 
@@ -248,6 +250,8 @@ async def get_additional_contributor_info(response):
         errors = contributor["embeds"]["users"].get('errors')
         if errors and errors[0]['detail'] == 'The requested user is no longer available.':
             contributor_data = errors[0]['meta']
+        elif errors and errors[0]['detail'] == 'Not found.':  # GDPR deleted user
+            contributor_data["full_name"] = "Deleted user"
         else:
             embed_data = contributor["embeds"]["users"]["data"]
             institution_url = embed_data["relationships"]["institutions"]["links"][
